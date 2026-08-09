@@ -1,0 +1,17 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "widget-capability",
+  "description": "The clamshell control. Needs just enough window control to be dragged, hidden and remembered, plus the autostart toggle in settings. No filesystem, shell or http access.",
+  "windows": ["widget"],
+  "permissions": [
+    "core:event:default",
+    "core:window:allow-start-dragging",
+    "core:window:allow-hide",
+    "core:window:allow-show",
+    "core:window:allow-set-focus",
+    "core:window:allow-set-position",
+    "core:window:allow-set-size",
+    "core:window:allow-outer-position",
+    "core:window:allow-scale-factor"
+  ]
+}

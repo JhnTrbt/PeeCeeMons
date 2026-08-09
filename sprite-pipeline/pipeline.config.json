@@ -1,0 +1,44 @@
+{
+  "$comment": [
+    "Settings for the ComfyUI sprite pipeline. Pre-filled from the models found",
+    "on this machine — check `checkpoint` and `lora` before your first run.",
+    "",
+    "checkpoint: must match a file in ComfyUI/models/checkpoints exactly.",
+    "  Found here: v1-5-pruned-emaonly-fp16.safetensors (chosen: most pixel-art",
+    "  LoRAs are trained on SD1.5), sdXL_v10VAEFix.safetensors,",
+    "  dreamshaperXL_v21TurboDPMSDE.safetensors, and others.",
+    "",
+    "lora: null means no LoRA. You have no pixel-art LoRA installed yet.",
+    "  Drop one in ComfyUI/models/loras and put its exact filename here — the",
+    "  set will look far more cohesive with one. See SPRITES.md.",
+    "",
+    "Everything else is fixed on purpose: the same sampler, steps and CFG for",
+    "all 20, so the only thing that varies between creatures is the prompt and",
+    "the seed. That is what makes reruns reproducible."
+  ],
+
+  "comfyui_url": "http://127.0.0.1:8188",
+  "timeout_seconds": 300,
+
+  "checkpoint": "v1-5-pruned-emaonly-fp16.safetensors",
+  "lora": null,
+  "lora_strength": 0.85,
+
+  "steps": 30,
+  "cfg": 7.0,
+  "sampler_name": "dpmpp_2m",
+  "scheduler": "karras",
+  "width": 512,
+  "height": 512,
+
+  "style_prefix": "16-bit RPG monster sprite, single",
+  "style_suffix": "front view, chunky pixel art, bold black outline, flat cel shading, Game Boy Color palette, centered, solid magenta background",
+  "negative": "text, watermark, signature, multiple creatures, realistic, 3d, blurry, gradient, drop shadow, extra limbs",
+
+  "chroma_key": "#FF00FF",
+  "chroma_tolerance": 70,
+  "frame_size": 32,
+
+  "$seed_overrides_comment": "Per-creature seed override, e.g. \"Flarepup\": 12345. Anything absent uses the seed from creatures.json. Bump one of these when a single creature comes out badly, then rerun with --only <Name>.",
+  "seed_overrides": {}
+}

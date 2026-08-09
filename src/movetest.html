@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Peeceemons — move dev test</title>
+<link rel="stylesheet" href="movetest.css">
+<script src="engine/guard.js"></script>
+</head>
+<body>
+<h1>PEECEEMONS — MOVE DEV TEST</h1>
+<p class="sub">All ten type moves firing on a loop, one representative creature each.
+Use the toggle to check reduced-motion still plays something readable.</p>
+<label class="toggle"><input type="checkbox" id="reduced"> Reduced motion</label>
+<div class="grid" id="grid"></div>
+<div id="status">Loading…</div>
+
+<script type="module">
+import { startLoop, fitCanvas } from './engine/loop.js';
+import { Particles } from './engine/particles.js';
+import { Creature } from './engine/creature.js';
+import { loadCreature } from './engine/sprites.js';
+import { MOVES, moveFor } from './engine/moves/index.js';
+
+const grid = document.getElementById('grid');
+const status = document.getElementById('status');
+const reducedBox = document.getElementById('reduced');
+const cells = [];
+
+const res = await fetch('./data/creatures.json');
+const { creatures } = await res.json();
+
+// One creature per type, so every move module gets exercised.
+const byType = new Map();
+for (const c of creatures) if (!byType.has(c.type)) byType.set(c.type, c);
+
+for (const type of Object.keys(MOVES)) {
+  const spec = byType.get(type);
+  if (!spec) { console.warn('no creature for type', type); continue; }
+
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.innerHTML =
+    `<div class="hdr"><span class="type">${type}</span>` +
+    `<span class="mv">${moveFor(type).name}</span></div>` +
+    `<div class="who">${spec.name}</div>`;
+  const cv = document.createElement('canvas');
+  cell.append(cv);
+  grid.append(cell);
+
+  const sheets = await loadCreature(spec);
+  const pet = new Creature(spec, sheets, { x: 110, groundY: 150, scale: 3 });
+  cells.push({ pet, particles: new Particles(80), cv, cooldown: Math.random() * 1.5 });
+}
+
+startLoop(
+  (dt) => {
+    const reduced = reducedBox.checked;
+    for (const c of cells) {
+      c.cooldown -= dt;
+      if (c.cooldown <= 0 && c.pet.state !== 'MOVE') {
+        c.pet.cooldown = 0;
+        c.pet.triggerMove();
+        c.cooldown = c.pet.move.duration + 0.7;
+      }
+      c.pet.update(dt, { width: 220, roaming: false, reduced, particles: c.particles });
+      c.particles.update(dt);
+    }
+  },
+  () => {
+    for (const c of cells) {
+      const ctx = fitCanvas(c.cv);
+      ctx.clearRect(0, 0, c.cv.clientWidth, c.cv.clientHeight);
+      const shake = reducedBox.checked ? 0 : c.pet.shake;
+      ctx.save();
+      if (shake) ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
+      c.particles.draw(ctx);
+      c.pet.draw(ctx);
+      ctx.restore();
+    }
+  }
+);
+
+status.textContent =
+  `${cells.length}/${Object.keys(MOVES).length} move modules running · ` +
+  `particle cap ${cells[0] ? cells[0].particles.max : 0} per cell`;
+</script>
+</body>
+</html>

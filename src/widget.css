@@ -1,0 +1,25 @@
+/* widget.css — the clamshell window. The device itself is drawn on the
+   canvas, so the page only has to stay out of the way: transparent
+   background (the shell has rounded corners), no text selection, no
+   scrollbars, and a normal arrow cursor over a frameless window. */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+#device {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  image-rendering: pixelated;
+}

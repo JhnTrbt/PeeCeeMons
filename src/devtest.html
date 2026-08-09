@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Peeceemons — sprite dev test</title>
+<style>
+  :root { --bg:#141a14; --panel:#1d261d; --line:#31402f; --text:#c8e6c0; --dim:#7f9a7a; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+         font-family: ui-monospace, Consolas, monospace; font-size:12px; padding:16px; }
+  h1 { font-size:15px; margin:0 0 4px; letter-spacing:.08em; }
+  p.sub { color:var(--dim); margin:0 0 16px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:10px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:8px 10px 10px; }
+  .hdr { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+  .name { font-weight:700; letter-spacing:.05em; }
+  .meta { color:var(--dim); font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
+  .rows { display:flex; flex-direction:column; gap:4px; }
+  .row { display:flex; align-items:flex-end; gap:8px; }
+  .lbl { color:var(--dim); font-size:9px; width:34px; text-transform:uppercase; letter-spacing:.06em; }
+  canvas { image-rendering: pixelated; background:
+      repeating-conic-gradient(#0e130e 0% 25%, #182018 0% 50%) 50%/12px 12px; border-radius:2px; }
+  .swatches { display:flex; gap:2px; margin-left:auto; }
+  .sw { width:11px; height:11px; border:1px solid #0008; border-radius:1px; }
+  #status { margin-top:14px; color:var(--dim); }
+  .bad { color:#ff8a7a; }
+</style>
+</head>
+<body>
+<h1>PEECEEMONS — SPRITE DEV TEST</h1>
+<p class="sub">All 20 creatures, every sheet, plus silhouettes. Real PNGs in assets/sprites/&lt;Name&gt;/ override the procedural placeholder automatically — the “src” tag says which you are looking at.</p>
+<div class="grid" id="grid"></div>
+<div id="status">Loading…</div>
+
+<script type="module">
+import { loadCreature, silhouette, FRAME } from './engine/sprites.js';
+
+const SCALE = 3;
+const grid = document.getElementById('grid');
+const status = document.getElementById('status');
+
+function sheetCanvas(sheet, scale) {
+  const c = document.createElement('canvas');
+  c.width = sheet.fw * sheet.frames * scale;
+  c.height = sheet.fh * scale;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(sheet.canvas, 0, 0, c.width, c.height);
+  return c;
+}
+
+function row(label, node) {
+  const r = document.createElement('div');
+  r.className = 'row';
+  const l = document.createElement('span');
+  l.className = 'lbl';
+  l.textContent = label;
+  r.append(l, node);
+  return r;
+}
+
+try {
+  const res = await fetch('./data/creatures.json');
+  if (!res.ok) throw new Error('creatures.json HTTP ' + res.status);
+  const { creatures } = await res.json();
+
+  let procedural = 0, real = 0, blank = 0;
+
+  for (const spec of creatures) {
+    const sheets = await loadCreature(spec);
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'hdr';
+    hdr.innerHTML =
+      `<span class="name">${spec.id}. ${spec.name}</span>` +
+      `<span class="meta">${spec.tier} · ${spec.type} · ${spec.body}` +
+      `${sheets.idle.procedural ? '' : ' · REAL ART'}</span>`;
+    const sw = document.createElement('span');
+    sw.className = 'swatches';
+    for (const hex of spec.palette) {
+      const s = document.createElement('span');
+      s.className = 'sw';
+      s.style.background = hex;
+      sw.append(s);
+    }
+    hdr.append(sw);
+    card.append(hdr);
+
+    const rows = document.createElement('div');
+    rows.className = 'rows';
+    rows.append(row('idle', sheetCanvas(sheets.idle, SCALE)));
+    rows.append(row('walk', sheetCanvas(sheets.walk, SCALE)));
+    rows.append(row('move', sheetCanvas(sheets.move, SCALE)));
+    rows.append(row('sil', sheetCanvas(silhouette(sheets.idle), SCALE)));
+    card.append(rows);
+    grid.append(card);
+
+    sheets.idle.procedural ? procedural++ : real++;
+
+    // Guard against a template that silently paints nothing.
+    const t = sheets.idle.canvas.getContext('2d')
+      .getImageData(0, 0, FRAME, FRAME).data;
+    let opaque = 0;
+    for (let i = 3; i < t.length; i += 4) if (t[i] > 0) opaque++;
+    if (opaque < 40) { blank++; card.style.outline = '2px solid #ff8a7a'; }
+  }
+
+  status.innerHTML =
+    `${creatures.length} creatures · ${procedural} procedural · ${real} real art` +
+    (blank ? ` · <span class="bad">${blank} suspiciously empty (outlined red)</span>` : ' · none empty');
+} catch (err) {
+  status.innerHTML = `<span class="bad">FAILED: ${err.message}</span>`;
+  console.error(err);
+}
+</script>
+</body>
+</html>

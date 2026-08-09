@@ -1,0 +1,578 @@
+{
+  "$comment": "Peeceemons roster. Creatures with tier 'evolved' are not findable in the wild: they are earned by winning battles while using the creature named in 'evolvesFrom'. All 20 creatures are ORIGINAL designs. palette = [base, shade, highlight, outline]. seed drives both the procedural placeholder generator and the Track B sprite pipeline, so both are reproducible. body selects a silhouette template in engine/sprites.js. Edit this file to retune the roster without touching engine code.",
+  "creatures": [
+    {
+      "id": 1,
+      "name": "Flarepup",
+      "tier": "starter",
+      "type": "fire",
+      "body": "quadruped",
+      "size": "small",
+      "note": "small orange fox-pup, flame tuft on head",
+      "palette": [
+        "#F87838",
+        "#C03810",
+        "#FFD060",
+        "#401008"
+      ],
+      "seed": 101001,
+      "features": [
+        "flameTuft"
+      ],
+      "evolvesInto": "Blazehound"
+    },
+    {
+      "id": 2,
+      "name": "Dripling",
+      "tier": "starter",
+      "type": "water",
+      "body": "blob",
+      "size": "small",
+      "note": "round blue tadpole-blob with a fin crest",
+      "palette": [
+        "#38A0F8",
+        "#1050C0",
+        "#A8E8FF",
+        "#082040"
+      ],
+      "seed": 102002,
+      "features": [
+        "finCrest"
+      ],
+      "evolvesInto": "Tidefin"
+    },
+    {
+      "id": 3,
+      "name": "Sproutle",
+      "tier": "starter",
+      "type": "grass",
+      "body": "sprite",
+      "size": "small",
+      "note": "green seed-sprite with a leaf sprouting up",
+      "palette": [
+        "#58C838",
+        "#208030",
+        "#B8F868",
+        "#103018"
+      ],
+      "seed": 103003,
+      "features": [
+        "leafSprout"
+      ],
+      "evolvesInto": "Bloomstalk"
+    },
+    {
+      "id": 4,
+      "name": "Voltnip",
+      "tier": "starter",
+      "type": "electric",
+      "body": "quadruped",
+      "size": "small",
+      "note": "yellow rodent-critter with a bolt-shaped tail",
+      "palette": [
+        "#F8D830",
+        "#C08808",
+        "#FFF8A0",
+        "#402808"
+      ],
+      "seed": 104004,
+      "features": [
+        "boltTail"
+      ],
+      "evolvesInto": "Sparkfang"
+    },
+    {
+      "id": 5,
+      "name": "Frostkit",
+      "tier": "starter",
+      "type": "ice",
+      "body": "quadruped",
+      "size": "small",
+      "note": "pale-cyan kitten with icicle whiskers",
+      "palette": [
+        "#90E0E8",
+        "#4090B0",
+        "#E8FFFF",
+        "#183848"
+      ],
+      "seed": 105005,
+      "features": [
+        "icicleWhiskers"
+      ],
+      "evolvesInto": "Glacelynx"
+    },
+    {
+      "id": 6,
+      "name": "Pebblump",
+      "tier": "starter",
+      "type": "rock",
+      "body": "armored",
+      "size": "small",
+      "note": "grey boulder-golem with stubby arms",
+      "palette": [
+        "#A0A0A0",
+        "#585868",
+        "#D8D8D0",
+        "#202028"
+      ],
+      "seed": 106006,
+      "features": [
+        "stubbyArms"
+      ],
+      "evolvesInto": "Boulderon"
+    },
+    {
+      "id": 7,
+      "name": "Mystmind",
+      "tier": "starter",
+      "type": "psychic",
+      "body": "floating",
+      "size": "small",
+      "note": "violet floating orb with a single calm eye",
+      "palette": [
+        "#B060E0",
+        "#6828A0",
+        "#E8B8FF",
+        "#281040"
+      ],
+      "seed": 107007,
+      "features": [
+        "singleEye"
+      ],
+      "evolvesInto": "Aethermind"
+    },
+    {
+      "id": 8,
+      "name": "Shadeling",
+      "tier": "starter",
+      "type": "shadow",
+      "body": "wisp",
+      "size": "small",
+      "note": "dark-indigo wisp with glowing dot eyes",
+      "palette": [
+        "#504888",
+        "#282050",
+        "#9088D8",
+        "#100820"
+      ],
+      "seed": 108008,
+      "features": [
+        "glowEyes"
+      ],
+      "evolvesInto": "Nightveil"
+    },
+    {
+      "id": 9,
+      "name": "Nibblet",
+      "tier": "starter",
+      "type": "normal",
+      "body": "blob",
+      "size": "small",
+      "note": "beige round mouse-bun, big ears",
+      "palette": [
+        "#E0C098",
+        "#A07850",
+        "#FFF0D0",
+        "#382818"
+      ],
+      "seed": 109009,
+      "features": [
+        "bigEars"
+      ],
+      "evolvesInto": "Thumpaw"
+    },
+    {
+      "id": 10,
+      "name": "Cindermoth",
+      "tier": "wild",
+      "type": "fire",
+      "body": "winged",
+      "size": "small",
+      "note": "orange-red moth, ember-speckled wings",
+      "palette": [
+        "#E85038",
+        "#A02010",
+        "#FFA860",
+        "#380808"
+      ],
+      "seed": 110010,
+      "features": [
+        "emberSpeckle"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Puddleye",
+      "tier": "wild",
+      "type": "water",
+      "body": "blob",
+      "size": "small",
+      "note": "blue slime with a droplet eye",
+      "palette": [
+        "#40B8E8",
+        "#1868A8",
+        "#B0F0FF",
+        "#082838"
+      ],
+      "seed": 111011,
+      "features": [
+        "dropletEye"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Bramblebun",
+      "tier": "wild",
+      "type": "grass",
+      "body": "quadruped",
+      "size": "small",
+      "note": "green rabbit with thorny-vine ears",
+      "palette": [
+        "#68B848",
+        "#2A6828",
+        "#C8F878",
+        "#142808"
+      ],
+      "seed": 112012,
+      "features": [
+        "thornEars"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Sparrowatt",
+      "tier": "wild",
+      "type": "electric",
+      "body": "winged",
+      "size": "small",
+      "note": "yellow sparrow with crackling wingtips",
+      "palette": [
+        "#F8E058",
+        "#C09010",
+        "#FFFFC0",
+        "#403008"
+      ],
+      "seed": 113013,
+      "features": [
+        "crackleTips"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Snowtuft",
+      "tier": "wild",
+      "type": "ice",
+      "body": "blob",
+      "size": "small",
+      "note": "white fluff-ball with a frosty crown",
+      "palette": [
+        "#E8F8F8",
+        "#90B8C8",
+        "#FFFFFF",
+        "#384858"
+      ],
+      "seed": 114014,
+      "features": [
+        "frostCrown"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Cragbeetle",
+      "tier": "wild",
+      "type": "rock",
+      "body": "armored",
+      "size": "small",
+      "note": "grey armored beetle, stone shell",
+      "palette": [
+        "#8890A0",
+        "#485060",
+        "#C8D0D8",
+        "#181C28"
+      ],
+      "seed": 115015,
+      "features": [
+        "shellPlates"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Dozeghost",
+      "tier": "wild",
+      "type": "shadow",
+      "body": "wisp",
+      "size": "small",
+      "note": "sleepy purple ghost, half-closed eyes",
+      "palette": [
+        "#9060C0",
+        "#503080",
+        "#D0A8F0",
+        "#201038"
+      ],
+      "seed": 116016,
+      "features": [
+        "sleepyEyes"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Pyrothrone",
+      "tier": "legendary",
+      "type": "dragon",
+      "body": "drake",
+      "size": "large",
+      "note": "crowned fire-drake, ember mane",
+      "palette": [
+        "#F86018",
+        "#B02808",
+        "#FFC048",
+        "#380C04"
+      ],
+      "seed": 117017,
+      "features": [
+        "crown"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Tidalwyrm",
+      "tier": "legendary",
+      "type": "dragon",
+      "body": "serpentine",
+      "size": "large",
+      "note": "serpentine water-dragon, wave crest",
+      "palette": [
+        "#2890D8",
+        "#0A4890",
+        "#90E0FF",
+        "#041C40"
+      ],
+      "seed": 118018,
+      "features": [
+        "waveCrest"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Aurorex",
+      "tier": "legendary",
+      "type": "psychic",
+      "body": "stag",
+      "size": "large",
+      "note": "aurora-lit ice stag, glowing antlers",
+      "palette": [
+        "#A0E8D0",
+        "#4898A8",
+        "#F0FFF8",
+        "#204048"
+      ],
+      "seed": 119019,
+      "features": [
+        "antlers",
+        "glowEyes"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Umbraking",
+      "tier": "legendary",
+      "type": "dragon",
+      "body": "drake",
+      "size": "large",
+      "note": "shadow-dragon, void-black with violet edges",
+      "palette": [
+        "#302040",
+        "#100818",
+        "#A050E0",
+        "#050208"
+      ],
+      "seed": 120020,
+      "features": [
+        "voidEdge",
+        "glowEyes"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Blazehound",
+      "tier": "evolved",
+      "type": "fire",
+      "body": "quadruped",
+      "size": "large",
+      "note": "tall fire-hound, burning mane and ember-tipped tail",
+      "palette": [
+        "#FF8A2B",
+        "#B33C08",
+        "#FFE08A",
+        "#3A1004"
+      ],
+      "seed": 221021,
+      "features": [
+        "flameTuft"
+      ],
+      "evolvesFrom": "Flarepup"
+    },
+    {
+      "id": 22,
+      "name": "Tidefin",
+      "tier": "evolved",
+      "type": "water",
+      "body": "blob",
+      "size": "large",
+      "note": "broad blue water-beast with a tall sweeping fin crest",
+      "palette": [
+        "#2C86E8",
+        "#0B3E9E",
+        "#B8ECFF",
+        "#04122E"
+      ],
+      "seed": 222022,
+      "features": [
+        "finCrest"
+      ],
+      "evolvesFrom": "Dripling"
+    },
+    {
+      "id": 23,
+      "name": "Bloomstalk",
+      "tier": "evolved",
+      "type": "grass",
+      "body": "sprite",
+      "size": "large",
+      "note": "tall plant-sprite crowned with a wide open flower",
+      "palette": [
+        "#63D93C",
+        "#1C7A2A",
+        "#D6FF8C",
+        "#0C2412"
+      ],
+      "seed": 223023,
+      "features": [
+        "leafSprout"
+      ],
+      "evolvesFrom": "Sproutle"
+    },
+    {
+      "id": 24,
+      "name": "Sparkfang",
+      "tier": "evolved",
+      "type": "electric",
+      "body": "quadruped",
+      "size": "large",
+      "note": "lean yellow beast with a forked lightning tail",
+      "palette": [
+        "#FFE33A",
+        "#C9860A",
+        "#FFFFC8",
+        "#3A2404"
+      ],
+      "seed": 224024,
+      "features": [
+        "boltTail"
+      ],
+      "evolvesFrom": "Voltnip"
+    },
+    {
+      "id": 25,
+      "name": "Glacelynx",
+      "tier": "evolved",
+      "type": "ice",
+      "body": "quadruped",
+      "size": "large",
+      "note": "long-limbed pale-cyan lynx with an icicle ruff",
+      "palette": [
+        "#A6EEF6",
+        "#3C86AE",
+        "#FFFFFF",
+        "#12303F"
+      ],
+      "seed": 225025,
+      "features": [
+        "icicleWhiskers"
+      ],
+      "evolvesFrom": "Frostkit"
+    },
+    {
+      "id": 26,
+      "name": "Boulderon",
+      "tier": "evolved",
+      "type": "rock",
+      "body": "armored",
+      "size": "large",
+      "note": "hulking stone golem with slab shoulders",
+      "palette": [
+        "#ADAFAE",
+        "#4E5262",
+        "#E4E4DC",
+        "#191A22"
+      ],
+      "seed": 226026,
+      "features": [
+        "stubbyArms",
+        "shellPlates"
+      ],
+      "evolvesFrom": "Pebblump"
+    },
+    {
+      "id": 27,
+      "name": "Aethermind",
+      "tier": "evolved",
+      "type": "psychic",
+      "body": "floating",
+      "size": "large",
+      "note": "large violet orb ringed by orbiting motes",
+      "palette": [
+        "#C46EF6",
+        "#5E1EA6",
+        "#F4D2FF",
+        "#22093C"
+      ],
+      "seed": 227027,
+      "features": [
+        "singleEye",
+        "glowEyes"
+      ],
+      "evolvesFrom": "Mystmind"
+    },
+    {
+      "id": 28,
+      "name": "Nightveil",
+      "tier": "evolved",
+      "type": "shadow",
+      "body": "wisp",
+      "size": "large",
+      "note": "tall indigo wraith trailing ragged shadow",
+      "palette": [
+        "#5A4FA4",
+        "#241C4E",
+        "#A79EF0",
+        "#0B0418"
+      ],
+      "seed": 228028,
+      "features": [
+        "glowEyes"
+      ],
+      "evolvesFrom": "Shadeling"
+    },
+    {
+      "id": 29,
+      "name": "Thumpaw",
+      "tier": "evolved",
+      "type": "normal",
+      "body": "blob",
+      "size": "large",
+      "note": "sturdy beige mouse-beast with oversized paws and ears",
+      "palette": [
+        "#EFCBA0",
+        "#A97C4E",
+        "#FFF7E0",
+        "#33230F"
+      ],
+      "seed": 229029,
+      "features": [
+        "bigEars"
+      ],
+      "evolvesFrom": "Nibblet"
+    }
+  ]
+}
