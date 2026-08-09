@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "overlay-capability",
+  "description": "The roaming pet. It only listens for events and calls the app's own commands, so it gets no window control and no filesystem access at all.",
+  "windows": ["overlay"],
+  "permissions": ["core:event:default"]
+}

@@ -1,0 +1,50 @@
+﻿{
+  "$comment": "Type effectiveness for battles. 'strong' lists the types this type deals extra damage to; weaknesses are derived from it (X is weak to Y when Y lists X as strong). Keeping only one direction in the data makes contradictions impossible. Edit freely â€” engine/battle.js reads this at runtime.",
+  "multipliers": {
+    "strong": 2.0,
+    "neutral": 1.0,
+    "weak": 0.5
+  },
+  "strong": {
+    "fire": ["grass", "ice"],
+    "water": ["fire", "rock"],
+    "grass": ["water", "rock"],
+    "electric": ["water"],
+    "ice": ["grass", "dragon"],
+    "rock": ["fire", "electric", "ice"],
+    "psychic": ["shadow", "normal"],
+    "shadow": ["psychic"],
+    "dragon": ["dragon"],
+    "normal": []
+  },
+  "battle": {
+    "$comment": "missChance is the flat chance any attack whiffs. statusChance is the chance a landed hit also inflicts the attacker type's status. Both are deliberately low â€” they should add texture, not decide fights.",
+    "missChance": 0.1,
+    "statusChance": 0.22,
+    "$evolveComment": "Wins earned while using a starter before it evolves. Only creatures with an evolvesInto in creatures.json can evolve, which today means the nine starters.",
+    "evolveAt": 10
+  },
+
+  "status": {
+    "$comment": "One status per attacking type. dot = damage per turn to the afflicted; atkMul scales their attack; skipChance is the chance they lose a turn; drain heals the inflicter for the dot amount. Normal inflicts nothing, which is part of what makes it the plain one.",
+    "fire":     { "id": "burn",    "label": "BURNED",    "turns": 3, "dot": 3 },
+    "water":    { "id": "soaked",  "label": "SOAKED",    "turns": 3, "atkMul": 0.75 },
+    "grass":    { "id": "seeded",  "label": "SEEDED",    "turns": 3, "dot": 3, "drain": true },
+    "electric": { "id": "para",    "label": "PARALYSED", "turns": 3, "skipChance": 0.35 },
+    "ice":      { "id": "chilled", "label": "CHILLED",   "turns": 3, "atkMul": 0.7 },
+    "rock":     { "id": "bruised", "label": "BRUISED",   "turns": 3, "atkMul": 0.75 },
+    "psychic":  { "id": "confused","label": "CONFUSED",  "turns": 3, "skipChance": 0.3 },
+    "shadow":   { "id": "cursed",  "label": "CURSED",    "turns": 4, "dot": 3 },
+    "dragon":   { "id": "shaken",  "label": "SHAKEN",    "turns": 3, "atkMul": 0.7 },
+    "normal":   null
+  },
+
+  "tiers": {
+    "$comment": "Battle stats and catch difficulty by rarity. `wins` is the [min, max] number of battles needed to earn that creature; like hp and attack, each individual creature sits at a fixed point inside its band, chosen from its own seed. So two wilds are not identical, but every wild is easier than every legendary.",
+    "starter": { "hp": 42, "attack": 10, "wins": [3, 5] },
+    "wild": { "hp": 46, "attack": 11, "wins": [3, 5] },
+    "legendary": { "hp": 62, "attack": 14, "wins": [7, 10] },
+    "evolved": { "hp": 59, "attack": 14, "wins": [1, 1] }
+  }
+}
+

@@ -1,0 +1,67 @@
+# Builds Peeceemons for Windows and macOS and attaches both to a GitHub
+# Release. macOS binaries cannot be produced on a Windows machine — Apple's
+# toolchain only runs on macOS — so this workflow is how you get a Mac build
+# without owning a Mac. GitHub's macOS runners are free for public repos.
+#
+# Trigger it by pushing a tag:
+#     git tag v0.1.0 && git push origin v0.1.0
+# or run it by hand from the Actions tab.
+
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Universal binary: one download that runs on both Apple Silicon
+          # and older Intel Macs.
+          - os: macos-latest
+            target: universal-apple-darwin
+            args: "--target universal-apple-darwin --bundles dmg,app"
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            args: "--bundles nsis"
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Cache cargo
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      # There is no frontend build step: the app is plain HTML/CSS/JS with no
+      # bundler, so Tauri picks src/ up directly.
+      - name: Build and publish
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "Peeceemons ${{ github.ref_name }}"
+          releaseBody: |
+            Download the installer for your platform below.
+
+            **Windows** — `.exe` installer. SmartScreen will warn that the
+            publisher is unknown; choose More info -> Run anyway.
+
+            **macOS** — `.dmg`. The app is not notarised, so macOS will refuse
+            it on first launch. Right-click the app and choose Open, then
+            confirm, or run:
+            `xattr -cr /Applications/Peeceemons.app`
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}

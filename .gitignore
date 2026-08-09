@@ -1,0 +1,24 @@
+# Rust / Tauri build output. This is ~6.5 GB and is fully reproducible from
+# source, so it must never go near the repo.
+/src-tauri/target/
+/src-tauri/gen/schemas/
+
+# Packaged installers. These belong on a GitHub Release, not in git history —
+# committing binaries makes the repo permanently large.
+/dist/
+
+# Sprite pipeline working files: raw ComfyUI output, previews and self-test
+# artefacts are all regenerable.
+/sprite-pipeline/_raw/
+/sprite-pipeline/_preview/
+
+# Local tooling settings, specific to one machine.
+/.claude/settings.local.json
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Real sprite art IS meant to be committed when it exists —
+# src/assets/sprites/ is deliberately not ignored.
