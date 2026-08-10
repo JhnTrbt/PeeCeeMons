@@ -12,6 +12,11 @@
 /sprite-pipeline/_raw/
 /sprite-pipeline/_preview/
 
+# Python bytecode. Regenerated on every run and tied to one interpreter
+# version, so it is pure noise in a diff.
+__pycache__/
+*.pyc
+
 # Local tooling settings, specific to one machine.
 /.claude/settings.local.json
 
