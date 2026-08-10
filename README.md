@@ -8,7 +8,10 @@ pick which of the 20 creatures is out, and every so often something rustles in
 the grass next to your pet — click it to battle, and win enough to add that
 creature to your collection.
 
-All 20 creatures are original designs made for this app.
+All creatures are original designs made for this app.
+
+> **In a hurry?** [`CHEATSHEET.md`](CHEATSHEET.md) is the one-page version:
+> install, start, stop, hotkeys and troubleshooting.
 
 ---
 
