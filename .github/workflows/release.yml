@@ -24,6 +24,12 @@ on:
 
 jobs:
   build:
+    # Creating the release and uploading assets both write to the repo. The
+    # default GITHUB_TOKEN is read-only, which fails only at the very end,
+    # after a full build, with "Resource not accessible by integration".
+    permissions:
+      contents: write
+
     # On a tag push this is the tag itself; on a hand-run it is whatever was
     # typed in. Without this, a hand-run would resolve to the branch name and
     # publish a release tagged "main".
@@ -36,11 +42,17 @@ jobs:
         include:
           # Universal binary: one download that runs on both Apple Silicon
           # and older Intel Macs.
+          #
+          # "universal-apple-darwin" is a Tauri concept, not a rustup one --
+          # Tauri builds both real targets and lipos them together. Asking
+          # rustup to install it fails with "component 'rust-std' for target
+          # 'universal-apple-darwin' is unavailable", so the toolchain step
+          # gets the two real targets and only Tauri sees the universal name.
           - os: macos-latest
-            target: universal-apple-darwin
+            rust_targets: "aarch64-apple-darwin,x86_64-apple-darwin"
             args: "--target universal-apple-darwin --bundles dmg,app"
           - os: windows-latest
-            target: x86_64-pc-windows-msvc
+            rust_targets: "x86_64-pc-windows-msvc"
             args: "--bundles nsis"
 
     runs-on: ${{ matrix.os }}
@@ -54,7 +66,7 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: ${{ matrix.rust_targets }}
 
       - name: Cache cargo
         uses: swatinem/rust-cache@v2
