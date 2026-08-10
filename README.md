@@ -11,6 +11,11 @@ creature to your collection.
 All 29 creatures — 20 to find and 9 more to earn by evolving — are original
 designs made for this app.
 
+<img src="media/pet-roaming.gif" width="278" alt="Flarepup walking along the taskbar">
+
+▶️ **[Watch the 48-second walkthrough](media/demo.mp4)** — cold start, the pet
+roaming, the device, and a couple of battles.
+
 > **In a hurry?** [`CHEATSHEET.md`](CHEATSHEET.md) is the one-page version:
 > install, start, stop, hotkeys and troubleshooting.
 
@@ -42,6 +47,8 @@ the creature itself.
 ### The device
 
 Press **Ctrl + Alt + P** to show or hide the clamshell.
+
+<img src="media/widget-ui.jpg" width="330" alt="The clamshell device showing the creature carousel">
 
 | Control | Keyboard | What it does |
 |---|---|---|
@@ -79,6 +86,8 @@ You start with the nine starters. The other eleven have to be earned.
 Every so often — about once or twice an hour by default — **grass rustles
 around your pet and a `!` pops up over its head**. Click your pet while that is
 happening and a battle starts against a wild creature.
+
+<img src="media/battle.gif" width="300" alt="A battle: a wild Dripling appears and takes a super-effective hit">
 
 - Press **A** to attack. Your creature uses its own signature move.
 - Type matters. Fire beats Grass, Water beats Fire, and so on — the full chart
@@ -119,6 +128,12 @@ harder, and join your collection alongside everyone else — they have their own
 get one is to earn it.
 
 That makes 29 creatures in all: 20 to find, 9 to earn.
+
+Here are the 20 base forms. Every pixel is generated at runtime from a
+four-colour palette and a seed — there are no image files anywhere in the app
+(see [`SPRITES.md`](SPRITES.md)).
+
+![The 20 base creatures with their names and types](media/roster.png)
 
 ---
 
@@ -163,6 +178,8 @@ plain HTML/CSS/JavaScript frontend. There is no bundler and no `node_modules`.
   cursor watcher that makes the overlay click-through everywhere except the pet
 - `sprite-pipeline/` — optional. Generates real pixel art for the creatures
   with a local ComfyUI. See `SPRITES.md`
+- `media/` — the screenshots, animations and demo video used above, with
+  [notes on how each was captured](media/README.md)
 
 The creatures you see are drawn procedurally from each one's four-colour
 palette, so the app is complete without any art files. Drop real sprite sheets
