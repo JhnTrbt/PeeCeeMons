@@ -5,7 +5,10 @@
 #
 # Trigger it by pushing a tag:
 #     git tag v0.1.0 && git push origin v0.1.0
-# or run it by hand from the Actions tab.
+# or run it by hand from the Actions tab, giving it an existing tag to build.
+#
+# The hand-run path exists so you can add a Mac build to a tag that was
+# released from a Windows machine without cutting a new version.
 
 name: Release
 
@@ -13,9 +16,20 @@ on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to build, e.g. v0.1.0"
+        required: true
+        type: string
 
 jobs:
   build:
+    # On a tag push this is the tag itself; on a hand-run it is whatever was
+    # typed in. Without this, a hand-run would resolve to the branch name and
+    # publish a release tagged "main".
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -31,7 +45,11 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     steps:
+      # Check out the tag, not the default branch — a hand-run would
+      # otherwise build whatever is on main and label it with the tag.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_TAG }}
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -50,8 +68,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: "Peeceemons ${{ github.ref_name }}"
+          tagName: ${{ env.RELEASE_TAG }}
+          releaseName: "Peeceemons ${{ env.RELEASE_TAG }}"
           releaseBody: |
             Download the installer for your platform below.
 
