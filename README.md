@@ -188,3 +188,10 @@ into `src/assets/sprites/<Name>/` and it uses those instead, automatically.
 Two developer pages ship with the app and are handy if you are poking at it:
 open `devtest.html` for every creature's sheets, or `movetest.html` for all ten
 move animations.
+
+---
+
+## Licence
+
+MIT — see [`LICENSE`](LICENSE). Use it, fork it, take the sprite generator and
+put your own creatures in it.
