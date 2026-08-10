@@ -3,6 +3,7 @@ name = "peeceemons"
 version = "0.1.0"
 description = "A Game Boy Color-style desktop companion"
 authors = ["Peeceemons"]
+license = "MIT"
 edition = "2021"
 rust-version = "1.77"
 
