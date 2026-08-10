@@ -4,11 +4,12 @@ A tiny Game Boy Color–style critter that lives at the bottom of your screen.
 
 It walks about over your taskbar, blinks, dozes off, glances at your mouse, and
 now and then shows off its signature move. A little clamshell device lets you
-pick which of the 20 creatures is out, and every so often something rustles in
+pick which of your creatures is out, and every so often something rustles in
 the grass next to your pet — click it to battle, and win enough to add that
 creature to your collection.
 
-All creatures are original designs made for this app.
+All 29 creatures — 20 to find and 9 more to earn by evolving — are original
+designs made for this app.
 
 > **In a hurry?** [`CHEATSHEET.md`](CHEATSHEET.md) is the one-page version:
 > install, start, stop, hotkeys and troubleshooting.

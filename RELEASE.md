@@ -88,7 +88,7 @@ Treat the Mac build as promising but unproven until someone runs it.
      "dist\Peeceemons_0.1.0_x64-setup.exe" `
      "dist\Peeceemons-0.1.0-portable.zip" `
      --title "Peeceemons 0.1.0" `
-     --notes "First release. Twenty original creatures, wild encounters and battles."
+     --notes "First release. Twenty-nine original creatures, wild encounters and battles."
    ```
 3. Send people the release page link. The installer is the one to point them
    at; the zip is for anyone who would rather not install.
